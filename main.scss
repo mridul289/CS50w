@@ -1,0 +1,101 @@
+$non-active: #f37b85;
+$active: #ff5566;
+
+.b-line {
+    width: 10px;
+    height: 146px;
+    float: left;
+}
+
+@font-face {
+    font-family: 'Gotham';
+    src: url('GothamBold.eot');
+    src: url('GothamBold.eot?#iefix') format('embedded-opentype'),
+        url('GothamBold.woff2') format('woff2'),
+        url('GothamBold.woff') format('woff'),
+        url('GothamBold.svg#GothamBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    background-color: #581845;
+}
+
+#head {
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    font-size: 100px;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: #900C3F;
+}
+
+.button {
+    margin: 20px;
+    width: 300px;
+    height: 150px;;
+    border: 2px solid black;
+    background-color: #f0d9d9;
+    text-align: center;
+
+    .maintext{
+        margin-top: 45px;
+        font-size: 35px;
+    }
+
+    .subtext {
+        margin-top: 2px;
+        font-size: 13px;
+        font-family: 'Barlow', sans-serif;
+    }
+}
+
+.button-line {
+    @extend .b-line;
+    background-color: $non-active;
+}
+
+.button:hover{
+    .button-line {
+    @extend .button-line;
+    background-color: #ff5566;
+    }
+}
+
+#doodle {
+    background-image: url('Images/Doodle.jpeg');
+    background-size: 300px;
+    background-color: #9acedc6f;
+    background-blend-mode: lighten;
+
+    #doodle-font {
+        font-family: 'Bangers', cursive;
+        font-size: 60px;
+        margin-top: 29px;
+    }
+}
+
+
+#CS50 {
+    font-family: 'Gotham';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 50px;
+    margin-top: 38px;
+    margin-bottom: -20px;
+}
+
+#Math {
+    font-family: 'Encode Sans', sans-serif;
+    margin-bottom: -8px;
+}
+
+#Physics {
+    font-family: 'Calligraffitti', cursive;
+    font-size: 40px;
+}

@@ -1,0 +1,35 @@
+h2 {
+    color:lightsalmon;
+    text-align: center;
+    font-style: italic;
+}
+text {
+    color: royalblue;
+    text-align: justify;
+    stroke: hotpink;
+}
+body {
+    background-color: #d0a8d055;
+}
+.button {
+    border: 2px solid black;
+    text-align: center;
+    color: #6333b6;
+    font-size: 30px;
+    /*padding: 10px;*/
+    width: 200px;
+    height: 100px;
+    background-color: #ffffff;
+    /*margin: 70px;*/
+}
+.button-insides {
+    width: 10px;
+    height: 100px;
+    background-color: pink;
+}
+
+.button:hover > .button-insides {
+    width: 10px;
+    height: 100px;
+    background-color: #f6798e;
+}
