@@ -6,5 +6,7 @@ from django.http import HttpResponse
 def index(request):
     return render(request, 'sender/main.html')
 
-def subject(request, subjectname):
-    return HttpResponse(f"This is {subjectname}!")
+def dashboard(request, name):
+    return render(request, 'sender/dashboard.html', {
+        "name": name.capitalize(),
+    })
