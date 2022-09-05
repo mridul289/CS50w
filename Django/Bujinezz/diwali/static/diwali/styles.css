@@ -1,0 +1,10 @@
+.flexbox {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    justify-content: space-evenly;
+}
+
+div {
+    font-size: 100px;
+}

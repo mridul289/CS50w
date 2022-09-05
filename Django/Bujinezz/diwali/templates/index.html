@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Is it Diwali?</title>
+        <link href="{% static 'diwali\styles.css' %}" rel="stylesheet" >
+    </head>
+    <body>
+        <div class="flexbox">
+            {% if here %}
+            It is Diwali!
+            {% else %}
+            NOT Diwali
+            {% endif %}
+        </div>
+    </body>
+</html>
