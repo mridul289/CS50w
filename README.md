@@ -1,1 +1,0 @@
-Starting web dev from screatch!
