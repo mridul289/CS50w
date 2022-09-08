@@ -1,0 +1,33 @@
+.permanent {
+    font-size: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    color: grey;
+    text-align: center;
+}
+
+#welcome {
+    font-size: 30px;
+}
+
+a {
+    text-decoration: none;
+    color:brown;
+}
+
+#form {
+    padding-top: 50px;
+}
+
+#back {
+    padding-top: 10px;
+}
+
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td, th {
+    border: 1px solid black;
+    padding: 5px;
+}
+
