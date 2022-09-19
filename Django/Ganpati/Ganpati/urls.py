@@ -14,9 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path as url
+from notifier.views import RetailerAutocomplete
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('notif/', include('notifier.urls'))
+    path('', include('notifier.urls')),
+    path('users/', include('users.urls')),
+    url(
+        r'retailer-autocomplete/$',
+        RetailerAutocomplete.as_view(),
+        name='retailer-autocomplete'
+    )
 ]

@@ -2,7 +2,8 @@
 {% load crispy_forms_tags %}
 
 {% block body %}
-
+<body style="background-image: -webkit-linear-gradient(to right, #8fb9adf7, #72a0f1f5);
+background-image: linear-gradient(to right, #8fb9adf7, #72a0f1f5)">
 <div>
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -11,19 +12,23 @@
             <div class="card-body p-5 text-center">
               <div class="mb-md-5 mt-md-4 pb-5">
   
-                <h2 class="fw-bold mb-2 text-uppercase">Receipt</h2>
+                <h2 class="fw-bold mb-2 text-uppercase">Add Retailer</h2>
                 <p class="text-white-50 mb-5">Welcome {{ user }}</p>
   
-                <form action="{% url 'notifier:invoicepage' %}" method="post">
-                    {% crispy invoiceform %}
+                <form action="{% url 'notifier:addretailer' %}" method="post">
+                    {% crispy retailerform %}
                 </form>
                 <a href="{% url 'users:logout' %}">
                     <button type="button" class="btn btn-danger">Logout</button>
                 </a>
-                <a href="{% url 'notifier:addretailer' %}">
-                  <button type="button" class="btn btn-info">Add Retailer</button>
+                <a href="{% url 'notifier:invoicepage' %}">
+                <button type="button" class="btn btn-info">Add Invoice</button>
                 </a>
-                <div style="padding: 20px"><h5>{{ current_invoice }}</h5></div>
+                <div style="padding: 20px"><h5>
+                    {% if current_retailer %}
+                    Created {{ current_retailer }}
+                    {% endif %}
+                </h5></div>
                 </div>
               </div>
             </div>
@@ -32,6 +37,7 @@
       </div>
     </div>
 </div>
+</body>
 
 
 

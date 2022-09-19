@@ -1,7 +1,7 @@
 .permanent {
     font-size: 15px;
     font-family: 'Times New Roman', Times, serif;
-    color: grey;
+    color: black;
     text-align: center;
 }
 
@@ -14,20 +14,7 @@ a {
     color:brown;
 }
 
-#form {
-    padding-top: 50px;
-}
-
-#back {
-    padding-top: 10px;
-}
-
-table {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-td, th {
-    border: 1px solid black;
-    padding: 5px;
-}
-
+.grad {
+    background-image: -webkit-linear-gradient(to right, #6b11cbf7, #2574fcf5);
+    background-image: linear-gradient(to right, #6a11cbf7, #2575fcf5)
+    }
