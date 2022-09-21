@@ -38,8 +38,12 @@ class Invoice(models.Model):
     salesman = models.ForeignKey(Salesman, help_text='Salesman ID', on_delete=models.CASCADE, related_name="salesman_invoices")
     date = models.DateField(auto_now_add=True, help_text='Date')
 
-    def __str__(self):
-        return f"Rs. {self.amount} accepted from {self.retailer} on {self.date}"
+    def __repr__(self):
+        return {
+            "retailer":Invoice.retailer,
+            "amount":Invoice.amount,
+            "date":Invoice.date
+        }
     
     def getdate(self):
         return self.date

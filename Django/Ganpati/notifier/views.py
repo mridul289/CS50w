@@ -8,11 +8,13 @@ from .models import *
 import requests
 from requests.structures import CaseInsensitiveDict
 from dal import autocomplete
+from datetime import date
+from django.template.defaulttags import register
 
 def whatsapp_send(number, salesman, amount):
     url = "https://graph.facebook.com/v14.0/101165502755328/messages"
     headers = CaseInsensitiveDict()
-    headers["Authorization"] = "Bearer xxxxxxxxx"
+    headers["Authorization"] = "Bearer xxxxxxxx"
     headers["Content-Type"] = "application/json"
     data = '{ "messaging_product": "whatsapp", "to": "91' + str(number) + '", "type": "template", "template": { "name": "notifier_message", "language": { "code": "en_US" }, "components": [ { "type": "body", "parameters": [ { "type": "text", "text": "' + salesman + '" }, { "type": "text", "text": "' + str(amount) + '" } ] } ] } }'
     resp = requests.post(url, headers=headers, data=data)
@@ -55,6 +57,13 @@ class RetailerForm(forms.Form):
         self.helper = FormHelper(self)
         self.helper.add_input(Submit('submit', 'Submit'))              #submit button
 
+
+#---------------------Filters-----------------------------------
+
+@register.filter(name="diction")
+def get_item(dictionary, key):
+    return dictionary[key]
+
 #---------------------Main Views-----------------------------------
 
 def index(request):                                                #Page to enter the invoice
@@ -88,6 +97,22 @@ def index(request):                                                #Page to ente
 
     return render(request, "notifier/index.html", context)          #on load
 
+def today(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("users:login"))
+
+    retailer_dict = {}
+    retailers = list(Retailer.objects.all().values('retailer_ID', 'name'))
+    for i in retailers:
+        retailer_dict[i['retailer_ID']] = i['name']
+
+    context = {
+        "Invoices":Invoice.objects.filter(salesman = Salesman.objects.get(name = request.user), date = date.today()).values(),
+        "retailers":retailer_dict
+    }
+
+    return render(request, "notifier/today.html", context)
+
 def addretailer(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("users:login"))
@@ -117,22 +142,3 @@ def addretailer(request):
             return render(request, "notifier/error.html", {"form", rform.cleaned_data})
         
     return render(request, "notifier/add.html", context)
-
-def invoices_list(request, ):                                        #absoultely no clue...
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse("users:login"))
-    
-    context = {}
-
-    if request.method == "POST":
-        iform = InvoiceForm(request.POST)
-        if iform.is_valid():
-            retailer = str(iform.cleaned_data["retailer"])
-            amount = iform.cleaned_data["amount"]
-            date = str(iform.cleaned_data["date"])
-            request.session["invoices_list"] += [(retailer, amount, date)]
-            return HttpResponseRedirect(reverse("notifier:invoice"))
-        else:
-            render(request, "notifier/invoice.html", context)
-
-    return render(request, "notifier/invoice.html", context)
