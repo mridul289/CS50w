@@ -1,0 +1,29 @@
+{% extends "notifier/template.html" %}
+
+{% block body %}
+<body style="background-image: -webkit-linear-gradient(to right, #fffffff7, #fffffff5);
+background-image: linear-gradient(to right, #fffffff7, #fffffff5)">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Invoice Number</th>
+        <th scope="col">Retailer</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for invoice in Invoices %}
+        <tr>
+            <th scope="row">{{ invoice.invoice_ID }}</th>
+            <td>{{ retailers|diction:invoice.retailer_id }}</td>
+            <td>{{ invoice.amount }}</td>
+            <td>{{ invoice.date }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</body>
+
+
+{% endblock %}
