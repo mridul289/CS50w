@@ -57,6 +57,9 @@ class RetailerForm(forms.Form):
         self.helper = FormHelper(self)
         self.helper.add_input(Submit('submit', 'Submit'))              #submit button
 
+class DateForm(forms.Form):
+    date = forms.DateField(label="Date", widget= forms.DateInput(attrs={'class': 'datepicker', 'placeholder': 'Select a date', 'type': 'date'}))
+
 
 #---------------------Filters-----------------------------------
 
@@ -101,14 +104,18 @@ def today(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("users:login"))
 
-    retailer_dict = {}
-    retailers = list(Retailer.objects.all().values('retailer_ID', 'name'))
-    for i in retailers:
-        retailer_dict[i['retailer_ID']] = i['name']
+    if request.method == "POST":
+        dform = DateForm(request.POST)
+        if dform.is_valid():
+            dt = dform.cleaned_data['date']
+    else:
+        dt = date.today()
 
+    retailer_dict = {i['retailer_ID']:i['name'] for i in list(Retailer.objects.all().values('retailer_ID', 'name'))}
     context = {
-        "Invoices":Invoice.objects.filter(salesman = Salesman.objects.get(name = request.user), date = date.today()).values(),
-        "retailers":retailer_dict
+        "Invoices":Invoice.objects.filter(salesman = Salesman.objects.get(name = request.user), date = dt).values(),
+        "retailers":retailer_dict,
+        "Date":DateForm()
     }
 
     return render(request, "notifier/today.html", context)

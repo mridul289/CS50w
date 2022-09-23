@@ -1,8 +1,14 @@
 {% extends "notifier/template.html" %}
+{% load crispy_forms_tags %}
 
 {% block body %}
 <body style="background-image: -webkit-linear-gradient(to right, #fffffff7, #fffffff5);
 background-image: linear-gradient(to right, #fffffff7, #fffffff5)">
+<br>
+<div class="d-flex justify-content-center"><form action="{% url 'notifier:today' %}" method="post">{% csrf_token %}
+  {{ Date }}
+  <input type="submit" value="Submit">
+</form></div>
 <table class="table">
     <thead>
       <tr>
