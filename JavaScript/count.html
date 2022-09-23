@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Count
+        </title>
+    </head>
+    <body>
+        <script>
+            var count = 1;
+            function counter(){
+                count ++;
+                document.getElementById("count").innerHTML = count;
+            }
+        </script>
+        <button onclick="counter()">Click to add 1</button>
+        <p onclick="counter()">Do not click here</p>
+        <div onclick="counter()">Told you</div>
+        <p id="count">This is the count</p>
+    </body>
+</html>
